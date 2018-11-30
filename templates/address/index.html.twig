@@ -8,14 +8,18 @@
                 <th scope="col">#</th>
                 <th scope="col">FirstName</th>
                 <th scope="col">LastName</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for address in address %}
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">{{ address.id }}</th>
                 <td>{{ address.firstName }}</td>
                 <td>{{ address.lastName }}</td>
+                <td>
+                    <a class="btn btn-primary" href="/delete/{{ address.id }}" role="button">Remove</a>
+                </td>
             </tr>
             {% endfor %}
             </tbody>

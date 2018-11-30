@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use function Sodium\add;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,17 +14,18 @@ class AddressController extends Controller
     /**
      * @Route("/list", name="list_addresses")
      */
-    public function indexAction()
+    public function index()
     {
         $address = $this->getDoctrine()
             ->getRepository(Address::class)->findAll();
+
         return $this->render('address/index.html.twig', array('address' => $address));
     }
 
     /**
      * @Route("/create", name="create_address")
      */
-    public function createAction(Request $request)
+    public function create()
     {
         return $this->render('address/create.html.twig');
     }
@@ -31,7 +33,7 @@ class AddressController extends Controller
     /**
      * @Route("/save", name="save_address")
      */
-    public function saveAction(Request $request)
+    public function save(Request $request)
     {
         $address = new Address();
 
@@ -43,5 +45,43 @@ class AddressController extends Controller
         $em->flush();
 
         return $this->redirect('list');
+    }
+
+    /**
+     * @Route("/edit/{id}", name="edit_address")
+     */
+    public function edit(Request $request)
+    {
+        $address = new Address();
+
+        $address->firstName = $request->get('firstName');
+        $address->lastName = $request->get('lastName');
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($address);
+        $em->flush();
+
+        return $this->redirect('list');
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete_address")
+     */
+    public function delete($id)
+    {
+        $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
+
+        if (empty($address)) {
+            $this->addFlash('error', 'Address not found');
+            return $this->redirectToRoute('list');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($address);
+        $em->flush();
+
+        $this->addFlash('notice', 'Address Removed');
+
+        return $this->redirect('/list');
     }
 }
