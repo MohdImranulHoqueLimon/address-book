@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Entity\Address;
+use App\Entity\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +15,8 @@ class AddressController extends Controller
      */
     public function indexAction()
     {
-        /*$address = $this->getDoctrine()
-            ->getRepository(Address::class)->findAll();*/
-        $address = array();
+        $address = $this->getDoctrine()
+            ->getRepository(Address::class)->findAll();
         return $this->render('address/index.html.twig', array('address' => $address));
     }
 
@@ -26,7 +25,8 @@ class AddressController extends Controller
      */
     public function createAction(Request $request)
     {
-        return $this->render('address/create.html.twig');
+        die(phpversion());
+        //return $this->render('address/create.html.twig');
     }
 
     /**
