@@ -25,8 +25,7 @@ class AddressController extends Controller
      */
     public function createAction(Request $request)
     {
-        die(phpversion());
-        //return $this->render('address/create.html.twig');
+        return $this->render('address/create.html.twig');
     }
 
     /**
