@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <div class="container">
+        <form action="save" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter First Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Enter Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Street Number</label>
+                        <input type="number" class="form-control" name="streetNumber" id="streetNumber" placeholder="Enter Street Number">
+                    </div>
+                    <div class="form-group">
+                        <label>Zip</label>
+                        <input type="text" class="form-control" name="zip" id="zip" placeholder="Enter Zip Code">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">File input</label>
+                        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">Please Select an Image file as an Identification. The
+                        file should be jpg/jpeg/png etc format</small>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" class="form-control" name="city" id="city" placeholder="Enter City Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Enter Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <label>Birth Day</label>
+                        <input type="text" class="form-control" id="birthDay" placeholder="Select Birth Day">
+                    </div>
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <input type="text" class="form-control" id="country" placeholder="Enter Country Name">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+
+</style>
+{% endblock %}
