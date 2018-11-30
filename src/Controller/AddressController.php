@@ -50,9 +50,21 @@ class AddressController extends Controller
     /**
      * @Route("/edit/{id}", name="edit_address")
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $address = new Address();
+        $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
+        return $this->render('address/edit.html.twig', array(
+            'address' => $address
+        ));
+    }
+
+    /**
+     * @Route("/update", name="save_address")
+     */
+    public function update(Request $request)
+    {
+        $id = $request->get('id');
+        $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
 
         $address->firstName = $request->get('firstName');
         $address->lastName = $request->get('lastName');

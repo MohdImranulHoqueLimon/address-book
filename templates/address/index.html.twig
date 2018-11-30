@@ -18,6 +18,7 @@
                 <td>{{ address.firstName }}</td>
                 <td>{{ address.lastName }}</td>
                 <td>
+                    <a class="btn btn-primary" href="/edit/{{ address.id }}" role="button">Edit</a>
                     <a class="btn btn-primary" href="/delete/{{ address.id }}" role="button">Remove</a>
                 </td>
             </tr>
