@@ -37,8 +37,8 @@ class AddressController extends Controller
     {
         $address = new Address();
 
-        $address->firstName = $request->get('firstName');
-        $address->lastName = $request->get('lastName');
+        $address->setFirstName($request->get('firstName'));
+        $address->setLastName($request->get('lastName'));
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($address);
