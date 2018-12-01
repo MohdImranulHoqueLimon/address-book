@@ -39,6 +39,13 @@ class AddressController extends Controller
 
         $address->setFirstName($request->get('firstName'));
         $address->setLastName($request->get('lastName'));
+        $address->setBirthDay($request->get('birthDay'));
+        $address->setCity($request->get('city'));
+        $address->setCountry($request->get('country'));
+        $address->setEmail($request->get('email'));
+        $address->setPhoneNumber($request->get('phoneNumber'));
+        $address->setStreetNumber($request->get('streetNumber'));
+        $address->setZip($request->get('zip'));
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($address);
@@ -59,7 +66,7 @@ class AddressController extends Controller
     }
 
     /**
-     * @Route("/update", name="save_address")
+     * @Route("/update", name="update_address")
      */
     public function update(Request $request)
     {
