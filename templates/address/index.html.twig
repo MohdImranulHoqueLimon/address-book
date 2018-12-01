@@ -20,9 +20,11 @@
             </tr>
             </thead>
             <tbody>
+            {% set counter = 0 %}
             {% for address in address %}
             <tr>
-                <th scope="row">{{ address.id }}</th>
+                {% set counter = counter + 1 %}
+                <th scope="row">{{ counter }}</th>
                 <td>{{ address.firstName }}</td>
                 <td>{{ address.lastName }}</td>
                 <td>{{ address.streetNumber }}</td>

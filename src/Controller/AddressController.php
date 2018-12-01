@@ -12,6 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class AddressController extends Controller
 {
     /**
+     * @Route("/", name="home")
+     */
+    public function home()
+    {
+        return $this->redirect('list');
+    }
+    
+    /**
      * @Route("/list", name="list_addresses")
      */
     public function index()
