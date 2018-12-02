@@ -66,6 +66,10 @@ class Address
         return $this->id;
     }
 
+    public function setId($id) {
+        $this->id;
+    }
+
     public function getFirstName()
     {
         return $this->firstName;

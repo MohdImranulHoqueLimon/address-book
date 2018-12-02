@@ -18,16 +18,31 @@ class AddressController extends Controller
     {
         return $this->redirect('list');
     }
-    
+
     /**
      * @Route("/list", name="list_addresses")
      */
-    public function index()
+    public function index(Request $request)
     {
-        $address = $this->getDoctrine()
+        $pageNumber = $request->query->getInt('page', 1);
+        $limit = $request->query->getInt('limit', 5);
+
+
+        //Todo; Should keep these kind of code inside repository
+        $addresses = $this->getDoctrine()
             ->getRepository(Address::class)->findAll();
 
-        return $this->render('address/index.html.twig', array('address' => $address));
+        /**
+         *@var $paginator \Knp\Component\Pager\Paginator
+         */
+        $paginator = $this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $addresses,
+            $pageNumber,
+            $limit
+        );
+
+        return $this->render('address/index.html.twig', array('addresses' => $result));
     }
 
     /**
@@ -81,8 +96,15 @@ class AddressController extends Controller
         $id = $request->get('id');
         $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
 
-        $address->firstName = $request->get('firstName');
-        $address->lastName = $request->get('lastName');
+        $address->setFirstName($request->get('firstName'));
+        $address->setLastName($request->get('lastName'));
+        $address->setBirthDay($request->get('birthDay'));
+        $address->setCity($request->get('city'));
+        $address->setCountry($request->get('country'));
+        $address->setEmail($request->get('email'));
+        $address->setPhoneNumber($request->get('phoneNumber'));
+        $address->setStreetNumber($request->get('streetNumber'));
+        $address->setZip($request->get('zip'));
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($address);
