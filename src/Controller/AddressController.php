@@ -25,7 +25,7 @@ class AddressController extends Controller
     public function index(Request $request)
     {
         $pageNumber = $request->query->getInt('page', 1);
-        $limit = $request->query->getInt('limit', 5);
+        $limit = $request->query->getInt('limit', 3);
 
 
         //Todo; Should keep these kind of code inside repository

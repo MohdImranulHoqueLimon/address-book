@@ -12,3 +12,31 @@ footer {
     margin-top: 30px !important;
 }
 
+.pagination span, .first, .last, .previous, .next, .current {
+    position: relative;
+    display: block;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px !important;
+    margin-right: 5px;
+    padding: 7px;
+}
+
+.pagination a {
+    list-style: none;
+    text-decoration: none !important;
+    padding: 7px;
+}
+
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+table td{
+    padding: 10px !important;
+}
