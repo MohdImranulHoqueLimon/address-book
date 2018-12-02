@@ -36,8 +36,8 @@
                 <td style="min-width: 120px">{{ address.email }}</td>
                 <td style="min-width: 150px"></td>
                 <td style="min-width: 100px">
-                    <a class="btn btn-primary" href="/edit/{{ address.id }}" role="button">Edit</a>
-                    <a class="btn btn-primary" href="/delete/{{ address.id }}" role="button">Remove</a>
+                    <a class="btn btn-primary" href="/edit/{{ address.id }}"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" href="/delete/{{ address.id }}"><i class="fa fa-remove"></i></a>
                 </td>
             </tr>
             {% endfor %}
