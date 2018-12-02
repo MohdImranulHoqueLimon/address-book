@@ -3,14 +3,27 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Form\AddressType;
+use App\Kernel;
+use App\Service\FileUploadService;
 use function Sodium\add;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DomCrawler\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File;
 
 class AddressController extends Controller
 {
+
+    private $fileUploadService;
+
+    public function __construct(FileUploadService $fileUploadService)
+    {
+        $this->fileUploadService = $fileUploadService;
+    }
+
     /**
      * @Route("/", name="home")
      */
@@ -54,7 +67,7 @@ class AddressController extends Controller
     }
 
     /**
-     * @Route("/save", name="save_address")
+     * @Route("/save", name="save_address", methods={"POST"})
      */
     public function save(Request $request)
     {
@@ -69,6 +82,15 @@ class AddressController extends Controller
         $address->setPhoneNumber($request->get('phoneNumber'));
         $address->setStreetNumber($request->get('streetNumber'));
         $address->setZip($request->get('zip'));
+
+        if(isset($_FILES['image'])){
+            $location = $this->getParameter('kernel.project_dir') . '/public/images/';
+            $imagePath = $this->fileUploadService->uploadImage($location);
+
+            if($imagePath != '') {
+                $address->setImage($imagePath);
+            }
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($address);

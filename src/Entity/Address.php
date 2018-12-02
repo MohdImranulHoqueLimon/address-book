@@ -61,6 +61,11 @@ class Address
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function getId()
     {
         return $this->id;
@@ -174,6 +179,18 @@ class Address
     public function setEmail(string $email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image)
+    {
+        $this->image = $image;
 
         return $this;
     }

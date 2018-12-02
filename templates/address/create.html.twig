@@ -2,7 +2,7 @@
 
 {% block container %}
     <div class="container">
-        <form action="save" method="post">
+        <form action="save" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">File input</label>
-                        <input type="file" class="form-control-file" name="image" id="image" aria-describedby="fileHelp">
+                        <input type="file" name="image" class="form-control-file" accept="image/*">
                         <small class="form-text text-muted">Please Select an Image file as an Identification. The
                         file should be jpg/jpeg/png etc format</small>
                     </div>

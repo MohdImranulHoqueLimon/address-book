@@ -2,7 +2,7 @@
 
 {% block container %}
     <div class="container">
-        <form action="/update" method="post">
+        <form action="/update" method="post" enctype="multipart/form-data">
 
             <input id="id" name="id" type="hidden" value="{{ address.getId() }}"/>
 
