@@ -54,6 +54,7 @@ class AddressService
 
         $id = $request->get('id');
         $address = $this->entityManager->getRepository(Address::class)->find($id);
+        $prevImagePath = $address->getImage();
 
         $address->setFirstName($request->get('firstName'));
         $address->setLastName($request->get('lastName'));
@@ -69,6 +70,7 @@ class AddressService
             $imagePath = $this->fileService->uploadImage($uploadLocation);
             if($imagePath != '') {
                 $address->setImage($imagePath);
+                $this->fileService->removeFile($uploadLocation . $prevImagePath);
             }
         }
 
