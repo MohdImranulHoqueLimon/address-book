@@ -3,8 +3,16 @@
 namespace App\Service;
 
 
-class FileUploadService
+use Symfony\Component\Filesystem\Filesystem;
+
+class FileService
 {
+    private $fileSystem;
+
+    public function __construct(Filesystem $fileSystem)
+    {
+        $this->fileSystem = $fileSystem;
+    }
 
     public function uploadImage($location) {
 
@@ -25,6 +33,12 @@ class FileUploadService
             return $file_name;
         } else {
             return '';
+        }
+    }
+
+    function removeFile($directory) {
+        if($this->fileSystem->exists($directory)) {
+            $this->fileSystem->remove(array($directory));
         }
     }
 }

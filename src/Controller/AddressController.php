@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Address;
-use App\Form\AddressType;
 use App\Kernel;
-use App\Service\FileUploadService;
-use function Sodium\add;
+use App\Service\AddressService;
+use App\Service\FileService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DomCrawler\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,11 +16,13 @@ use Symfony\Component\HttpFoundation\File;
 class AddressController extends Controller
 {
 
-    private $fileUploadService;
+    private $fileService;
+    private $addressService;
 
-    public function __construct(FileUploadService $fileUploadService)
+    public function __construct(FileService $fileService, AddressService $addressService)
     {
-        $this->fileUploadService = $fileUploadService;
+        $this->fileService = $fileService;
+        $this->addressService = $addressService;
     }
 
     /**
@@ -71,30 +72,8 @@ class AddressController extends Controller
      */
     public function save(Request $request)
     {
-        $address = new Address();
-
-        $address->setFirstName($request->get('firstName'));
-        $address->setLastName($request->get('lastName'));
-        $address->setBirthDay($request->get('birthDay'));
-        $address->setCity($request->get('city'));
-        $address->setCountry($request->get('country'));
-        $address->setEmail($request->get('email'));
-        $address->setPhoneNumber($request->get('phoneNumber'));
-        $address->setStreetNumber($request->get('streetNumber'));
-        $address->setZip($request->get('zip'));
-
-        if(isset($_FILES['image'])) {
-            $uploadLocation = $this->getParameter('image_directory');
-            $imagePath = $this->fileUploadService->uploadImage($uploadLocation);
-
-            if($imagePath != '') {
-                $address->setImage($imagePath);
-            }
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($address);
-        $em->flush();
+        $uploadLocation = $this->getParameter('image_directory');
+        $this->addressService->saveAddress($request, $uploadLocation);
 
         $this->addFlash(
             'success',
@@ -146,6 +125,7 @@ class AddressController extends Controller
     public function delete($id)
     {
         $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
+        $uploadLocation = $this->getParameter('image_directory') . $address->getImage();
 
         if (empty($address)) {
             $this->addFlash('error', 'Address not found');
@@ -156,6 +136,7 @@ class AddressController extends Controller
         $em->remove($address);
         $em->flush();
 
+        $this->fileService->removeFile($uploadLocation);
         $this->addFlash('success', 'Address Removed');
 
         return $this->redirect('/list');
