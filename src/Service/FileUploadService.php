@@ -22,7 +22,7 @@ class FileUploadService
 
         if($file_size < 2097152){
             move_uploaded_file($file_tmp,$location . $file_name);
-            return $location . $file_name;
+            return $file_name;
         } else {
             return '';
         }

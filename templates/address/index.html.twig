@@ -2,6 +2,19 @@
 
 {% block container %}
     <div class="container">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <table class="table table-striped table-bordered" style="overflow-x: auto !important;">
             <thead>
             <tr>
@@ -34,7 +47,17 @@
                 <td style="min-width: 120px">{{ address.phoneNumber }}</td>
                 <td style="min-width: 110px">{{ address.birthDay }}</td>
                 <td style="min-width: 120px">{{ address.email }}</td>
-                <td style="min-width: 150px"></td>
+                <td style="min-width: 100px">
+                    {% if address.image != '' %}
+                    <a href="images/{{ address.image }}" data-toggle="lightbox">
+                        <img width="100px" src="images/{{ address.image }}" class="img-fluid">
+                    </a>
+                    {% else %}
+                        <a href="images/dummy.jpg" data-toggle="lightbox">
+                            <img width="100px" src="images/dummy.jpg" class="img-fluid">
+                        </a>
+                    {% endif %}
+                </td>
                 <td style="min-width: 100px">
                     <a class="btn btn-primary" href="/edit/{{ address.id }}"><i class="fa fa-edit"></i></a>
                     <a class="btn btn-danger" href="/delete/{{ address.id }}"><i class="fa fa-remove"></i></a>

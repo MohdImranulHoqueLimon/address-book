@@ -38,7 +38,7 @@ class AddressController extends Controller
     public function index(Request $request)
     {
         $pageNumber = $request->query->getInt('page', 1);
-        $limit = $request->query->getInt('limit', 3);
+        $limit = $request->query->getInt('limit', 10);
 
 
         //Todo; Should keep these kind of code inside repository
@@ -83,9 +83,9 @@ class AddressController extends Controller
         $address->setStreetNumber($request->get('streetNumber'));
         $address->setZip($request->get('zip'));
 
-        if(isset($_FILES['image'])){
-            $location = $this->getParameter('kernel.project_dir') . '/public/images/';
-            $imagePath = $this->fileUploadService->uploadImage($location);
+        if(isset($_FILES['image'])) {
+            $uploadLocation = $this->getParameter('image_directory');
+            $imagePath = $this->fileUploadService->uploadImage($uploadLocation);
 
             if($imagePath != '') {
                 $address->setImage($imagePath);
@@ -95,6 +95,11 @@ class AddressController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($address);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Successfully saved data.'
+        );
 
         return $this->redirect('list');
     }
@@ -151,7 +156,7 @@ class AddressController extends Controller
         $em->remove($address);
         $em->flush();
 
-        $this->addFlash('notice', 'Address Removed');
+        $this->addFlash('success', 'Address Removed');
 
         return $this->redirect('/list');
     }
