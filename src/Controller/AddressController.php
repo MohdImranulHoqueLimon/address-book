@@ -6,6 +6,7 @@ use App\Entity\Address;
 use App\Kernel;
 use App\Service\AddressService;
 use App\Service\FileService;
+use Knp\Component\Pager\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DomCrawler\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -39,8 +40,7 @@ class AddressController extends Controller
     public function index(Request $request)
     {
         $pageNumber = $request->query->getInt('page', 1);
-        $limit = $request->query->getInt('limit', 10);
-
+        $limit = $request->query->getInt('limit', 3);
 
         //Todo; Should keep these kind of code inside repository
         $addresses = $this->getDoctrine()
@@ -99,23 +99,8 @@ class AddressController extends Controller
      */
     public function update(Request $request)
     {
-        $id = $request->get('id');
-        $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
-
-        $address->setFirstName($request->get('firstName'));
-        $address->setLastName($request->get('lastName'));
-        $address->setBirthDay($request->get('birthDay'));
-        $address->setCity($request->get('city'));
-        $address->setCountry($request->get('country'));
-        $address->setEmail($request->get('email'));
-        $address->setPhoneNumber($request->get('phoneNumber'));
-        $address->setStreetNumber($request->get('streetNumber'));
-        $address->setZip($request->get('zip'));
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($address);
-        $em->flush();
-
+        $uploadLocation = $this->getParameter('image_directory');
+        $this->addressService->updateAddress($request, $uploadLocation);
         return $this->redirect('list');
     }
 

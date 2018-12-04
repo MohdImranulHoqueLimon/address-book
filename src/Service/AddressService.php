@@ -41,7 +41,32 @@ class AddressService
 
         if(isset($_FILES['image'])) {
             $imagePath = $this->fileService->uploadImage($uploadLocation);
+            if($imagePath != '') {
+                $address->setImage($imagePath);
+            }
+        }
 
+        $this->entityManager->persist($address);
+        $this->entityManager->flush();
+    }
+
+    public function updateAddress(Request $request, $uploadLocation) {
+
+        $id = $request->get('id');
+        $address = $this->entityManager->getRepository(Address::class)->find($id);
+
+        $address->setFirstName($request->get('firstName'));
+        $address->setLastName($request->get('lastName'));
+        $address->setBirthDay($request->get('birthDay'));
+        $address->setCity($request->get('city'));
+        $address->setCountry($request->get('country'));
+        $address->setEmail($request->get('email'));
+        $address->setPhoneNumber($request->get('phoneNumber'));
+        $address->setStreetNumber($request->get('streetNumber'));
+        $address->setZip($request->get('zip'));
+
+        if(isset($_FILES['image'])) {
+            $imagePath = $this->fileService->uploadImage($uploadLocation);
             if($imagePath != '') {
                 $address->setImage($imagePath);
             }
