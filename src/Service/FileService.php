@@ -31,7 +31,7 @@ class FileService
 
         if($fileSize < 2097152){
             move_uploaded_file($fileTmp,$location . $newFileName);
-            return $fileName;
+            return $newFileName;
         } else {
             return '';
         }
