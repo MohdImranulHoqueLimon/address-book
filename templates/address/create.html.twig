@@ -2,7 +2,7 @@
 
 {% block container %}
     <div class="container">
-        <form action="save" method="post" enctype="multipart/form-data">
+        <form id="addressForm" action="save" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
@@ -65,16 +65,8 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}]
-    <script type="application/javascript">
-        $('input[name="birthDay"]').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            locale: {
-                format: 'MMM DD, YYYY'
-            }
-        });
-    </script>
+{% block javascripts %}
+    <script src="js/address.js"></script>
 {% endblock %}
 {% block stylesheets %}
 <style>

@@ -11,12 +11,12 @@
                     <div class="form-group">
                         <label>First Name</label>
                         <input type="text" class="form-control" value="{{ address.firstName }}"
-                               name="firstName" id="firstName" placeholder="Enter First Name">
+                               name="firstName" id="firstName" placeholder="Enter First Name" required>
                     </div>
                     <div class="form-group">
                         <label>Last Name</label>
                         <input type="text" class="form-control" value="{{ address.lastName }}"
-                               name="lastName" id="lastName" placeholder="Enter Last Name">
+                               name="lastName" id="lastName" placeholder="Enter Last Name" required>
                     </div>
                     <div class="form-group">
                         <label>Street Number</label>
@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label>Zip</label>
                         <input type="text" class="form-control" value="{{ address.zip }}"
-                               name="zip" id="zip" placeholder="Enter Zip Code">
+                               name="zip" id="zip" placeholder="Enter Zip Code" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">File input</label>
@@ -43,27 +43,27 @@
                     <div class="form-group">
                         <label>City</label>
                         <input type="text" class="form-control" value="{{ address.city }}"
-                               name="city" id="city" placeholder="Enter City Name">
+                               name="city" id="city" placeholder="Enter City Name" required>
                     </div>
                     <div class="form-group">
                         <label>Phone Number</label>
                         <input type="text" class="form-control" name="phoneNumber" value="{{ address.phoneNumber }}"
-                               id="phoneNumber" placeholder="Enter Phone Number">
+                               id="phoneNumber" placeholder="Enter Phone Number" required>
                     </div>
                     <div class="form-group">
                         <label>Birth Day</label>
                         <input type="text" class="form-control" value="{{ address.birthDay }}"
-                               name="birthDay" id="birthDay" placeholder="Select Birth Day">
+                               name="birthDay" id="birthDay" placeholder="Select Birth Day" required>
                     </div>
                     <div class="form-group">
                         <label>Email address</label>
                         <input type="email" class="form-control" value="{{ address.email }}"
-                               name="email" id="email" placeholder="Enter email">
+                               name="email" id="email" placeholder="Enter email" required>
                     </div>
                     <div class="form-group">
                         <label>Country</label>
                         <input type="text" class="form-control" value="{{ address.country }}"
-                               name="country" id="country" placeholder="Enter Country Name">
+                               name="country" id="country" placeholder="Enter Country Name" required>
                     </div>
                 </div>
             </div>
@@ -73,15 +73,7 @@
 {% endblock %}
 
 {% block javascripts %}]
-    <script type="application/javascript">
-        $('input[name="birthDay"]').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            locale: {
-                format: 'MMM DD, YYYY'
-            }
-        });
-    </script>
+    <script src="js/address.js"></script>
 {% endblock %}
 
 {% block stylesheets %}

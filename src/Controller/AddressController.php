@@ -125,4 +125,13 @@ class AddressController extends Controller
 
         return $this->redirect('/list');
     }
+
+    /**
+     * @Route("/is-email-exist", name="email-check", methods={"POST"})
+     */
+    public function isEmailExist(Request $request)
+    {
+        $result = $this->addressService->checkIsEmailExist($request->get('email'));
+        return new JsonResponse(array('result' => $result), 200);
+    }
 }
