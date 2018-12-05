@@ -2,7 +2,7 @@
 
 {% block container %}
     <div class="container">
-        <form action="/update" method="post" enctype="multipart/form-data">
+        <form id="addressForm" action="/update" method="post" enctype="multipart/form-data">
 
             <input id="id" name="id" type="hidden" value="{{ address.getId() }}"/>
 
@@ -34,9 +34,11 @@
                         <small class="form-text text-muted">Please Select an Image file as an Identification. The
                         file should be jpg/jpeg/png etc format</small>
 
-                        <a href="../images/{{ address.image }}" data-toggle="lightbox">
-                            <img width="100px" src="../images/{{ address.image }}" class="img-fluid">
-                        </a>
+                        {% if address.image != '' %}
+                            <a href="../images/{{ address.image }}" data-toggle="lightbox">
+                                <img width="100px" src="../images/{{ address.image }}" class="img-fluid">
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-6">
@@ -73,7 +75,7 @@
 {% endblock %}
 
 {% block javascripts %}]
-    <script src="js/address.js"></script>
+    <script src="../js/address.js"></script>
 {% endblock %}
 
 {% block stylesheets %}

@@ -17,20 +17,21 @@ class FileService
     public function uploadImage($location) {
 
         $errors= array();
-        $file_name = $_FILES['image']['name'];
-        $file_size =$_FILES['image']['size'];
-        $file_tmp =$_FILES['image']['tmp_name'];
-        $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+        $fileName = $_FILES['image']['name'];
+        $fileSize = $_FILES['image']['size'];
+        $fileTmp = $_FILES['image']['tmp_name'];
+        $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+        $newFileName = strtotime(time()) . '_' . $fileName;
 
         $extensions= array("jpeg","jpg","png");
 
-        if(in_array($file_ext, $extensions)=== false){
+        if(in_array($fileExt, $extensions)=== false){
             $errors[]="extension not allowed, please choose a JPEG or PNG file.";
         }
 
-        if($file_size < 2097152){
-            move_uploaded_file($file_tmp,$location . $file_name);
-            return $file_name;
+        if($fileSize < 2097152){
+            move_uploaded_file($fileTmp,$location . $newFileName);
+            return $fileName;
         } else {
             return '';
         }

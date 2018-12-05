@@ -26,7 +26,7 @@ $.validator.addMethod("isExist", function (value, element) {
             email: value
         },
         async: false,
-        timeout: 3000,
+        timeout: 3200,
         success: function(response) {
             if(response['result'] == true){
                 result = false;
