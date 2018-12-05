@@ -131,7 +131,11 @@ class AddressController extends Controller
      */
     public function isEmailExist(Request $request)
     {
-        $result = $this->addressService->checkIsEmailExist($request->get('email'));
-        return new JsonResponse(array('result' => $result), 200);
+        $email = $request->get('email');
+        $id = $request->get('id');
+
+
+        $result = $this->addressService->checkIsEmailExist($email, $id);
+        return new JsonResponse($result, 200);
     }
 }

@@ -78,11 +78,10 @@ class AddressService
         $this->entityManager->flush();
     }
 
-    public function checkIsEmailExist($email) {
-        $address = $this->entityManager->getRepository(Address::class)->findBy(array('email' => $email));
-        if(sizeof($address) > 0) {
-            return true;
-        }
-        return false;
+    public function checkIsEmailExist($email, $id) {
+        $address = $this->entityManager
+            ->getRepository(Address::class)
+            ->findAll();
+        return $address;
     }
 }
