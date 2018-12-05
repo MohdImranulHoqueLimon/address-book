@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     <link href="{{ asset('css/common.css') }}" type="text/css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     {% block stylesheets %}{% endblock %}
 </head>
@@ -18,8 +19,8 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">Address Book</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a href="list" class="p-2 text-dark">Home</a>
-        <a href="create" class="p-2 text-dark">Create</a>
+        <a href="/list" class="p-2 text-dark">Home</a>
+        <a href="/create" class="p-2 text-dark">Create</a>
     </nav>
     <a class="btn btn-outline-primary" href="#">Sign up</a>
 </div>
@@ -30,19 +31,12 @@
     </div>
 </div>
 
-<footer class="border-top">
-    <div class="row">
-        <div class="col-12 col-md">
-            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
-        </div>
-    </div>
-</footer>
-</body>
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 {% block javascripts %}
     <script type="application/javascript">
@@ -53,4 +47,12 @@
     </script>
 {% endblock %}
 
+<footer class="border-top">
+    <div class="row">
+        <div class="col-12 col-md">
+            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        </div>
+    </div>
+</footer>
+</body>
 </html>

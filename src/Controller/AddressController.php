@@ -8,7 +8,6 @@ use App\Service\AddressService;
 use App\Service\FileService;
 use Knp\Component\Pager\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DomCrawler\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,7 +30,7 @@ class AddressController extends Controller
      */
     public function home()
     {
-        return $this->redirect('list');
+        return $this->redirect('/list');
     }
 
     /**
@@ -101,7 +100,7 @@ class AddressController extends Controller
     {
         $uploadLocation = $this->getParameter('image_directory');
         $this->addressService->updateAddress($request, $uploadLocation);
-        return $this->redirect('list');
+        return $this->redirect('/list');
     }
 
     /**

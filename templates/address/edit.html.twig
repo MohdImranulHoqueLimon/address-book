@@ -72,6 +72,18 @@
     </div>
 {% endblock %}
 
+{% block javascripts %}]
+    <script type="application/javascript">
+        $('input[name="birthDay"]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            locale: {
+                format: 'MMM DD, YYYY'
+            }
+        });
+    </script>
+{% endblock %}
+
 {% block stylesheets %}
 <style>
 
